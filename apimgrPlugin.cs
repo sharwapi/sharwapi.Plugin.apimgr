@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,12 +10,13 @@ namespace sharwapi.Plugin.apimgr;
 public class apimgrPlugin : IApiPlugin
 {
     // 插件名称
-    public string Name => "apimgr";
+    public string Name => "sharwapi.apimgr";
     // 插件显示名称
     public string DisplayName => "API Manager";
     // 插件版本
     public string Version => "0.1.0";
-
+    // 禁用自动路由前缀
+    public bool UseAutoRoutePrefix => false;
     // 插件注册服务方法 (此插件不需要注册服务，使用默认函数)
     public void RegisterServices(IServiceCollection services, IConfiguration configuration) { }
     // 插件中间件配置方法 (此插件不需要配置中间件，使用默认函数)
