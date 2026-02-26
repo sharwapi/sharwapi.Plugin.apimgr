@@ -27,5 +27,5 @@ jobs:
       - name: Upload plugin DLL artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sharwapi-plugin-apimgr-dll
+          name: sharwapi.Plugin.apimgr.dll
           path: sharwapi.Plugin.apimgr/bin/Release/net10.0/sharwapi.Plugin.apimgr.dll
