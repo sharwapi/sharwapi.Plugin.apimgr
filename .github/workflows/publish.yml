@@ -23,11 +23,20 @@ jobs:
       - name: Build
         run: dotnet build sharwapi.Plugin.apimgr.csproj --configuration Release --no-restore
 
+      - name: Prepare plugin DLL artifact
+        run: |
+          mkdir -p ./artifacts
+          if [ ! -f "./bin/Release/net10.0/sharwapi.Plugin.apimgr.dll" ]; then
+            echo "Plugin DLL not found: ./bin/Release/net10.0/sharwapi.Plugin.apimgr.dll"
+            exit 1
+          fi
+          cp "./bin/Release/net10.0/sharwapi.Plugin.apimgr.dll" "./artifacts/"
+
       - name: Upload plugin DLL artifact
         uses: actions/upload-artifact@v4
         with:
           name: sharwapi.Plugin.apimgr.dll
-          path: sharwapi.Plugin.apimgr/bin/Release/net10.0/sharwapi.Plugin.apimgr.dll
+          path: ./artifacts/sharwapi.Plugin.apimgr.dll
 
   publish:
     needs: build
