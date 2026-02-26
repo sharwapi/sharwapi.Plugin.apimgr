@@ -1,0 +1,51 @@
+name: Publish
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore sharwapi.Plugin.apimgr.csproj
+
+      - name: Build
+        run: dotnet build sharwapi.Plugin.apimgr.csproj --configuration Release --no-restore
+
+      - name: Upload plugin DLL artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sharwapi-plugin-apimgr-dll
+          path: sharwapi.Plugin.apimgr/bin/Release/net10.0/sharwapi.Plugin.apimgr.dll
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download plugin DLL artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: sharwapi-plugin-apimgr-dll
+          path: ./artifacts
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          files: ./artifacts/sharwapi.Plugin.apimgr.dll
+          generate_release_notes: true

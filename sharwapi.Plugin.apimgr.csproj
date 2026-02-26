@@ -13,9 +13,4 @@
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
-	
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="xcopy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)sharwapi.Core\bin\$(Configuration)\$(TargetFramework)\Plugins\&quot; /Y /I" />
-	</Target>
-
 </Project>
