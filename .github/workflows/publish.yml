@@ -39,7 +39,7 @@ jobs:
       - name: Download plugin DLL artifact
         uses: actions/download-artifact@v4
         with:
-          name: sharwapi-plugin-apimgr-dll
+          name: sharwapi.Plugin.apimgr.dll
           path: ./artifacts
 
       - name: Create GitHub Release
