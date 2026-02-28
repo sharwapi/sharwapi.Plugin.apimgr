@@ -14,7 +14,7 @@ Its primary responsibility is to serve as the backend API for the management con
 ## Installation & Usage
 
 1. Download the compiled `.dll` file from [Releases](https://github.com/sharwapi/sharwapi.plugin.apimgr/releases).
-2. Place it into the `Plugins` directory of the Core API.
+2. Place it into the `plugins` directory of the Core API.
 3. Restart the API.
 
 ## License
